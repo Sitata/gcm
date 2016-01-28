@@ -115,8 +115,11 @@ func (c *Conn) Send(m *OutMsg) (n int, err error) {
 }
 
 // Ping the server
-func (c *Conn) Ping() {
-	c.xmppConn.PingC2S("", c.Host)
+func (c *Conn) Ping() error {
+	_, err := c.xmppConn.SendOrg(fmt.Sprintf(`<id from='' to='%s' id='c2s1' type='get'
+<ping xmlns='urn:xmpp:ping'/>
+</iq>`, c.Host))
+	return err
 }
 
 // getID generates a unique message ID using crypto/rand in the form "m-96bitBase16"
