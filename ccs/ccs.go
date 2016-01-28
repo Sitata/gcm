@@ -114,6 +114,11 @@ func (c *Conn) Send(m *OutMsg) (n int, err error) {
 	return c.xmppConn.SendOrg(res)
 }
 
+// Ping the server
+func (c *Conn) Ping() {
+	c.xmppConn.PingC2S("", c.Host)
+}
+
 // getID generates a unique message ID using crypto/rand in the form "m-96bitBase16"
 func getMsgID() (string, error) {
 	// todo: we can use sequential numbers optionally, just as the Android client does (1, 2, 3..) in upstream messages
