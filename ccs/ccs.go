@@ -85,11 +85,13 @@ func (c *Conn) Receive() (*InMsg, error) {
 	case "control":
 		return &m, nil // todo: handle connection draining (and any other control message type?)
 	case "":
+		// TODO: Here we don't want to ack the message just yet. We may want to persist to DB first
+		//       to ensure the integrity of the incoming data. Perhaps this can be an option?
 		// acknowledge the incoming ordinary messages as per spec
-		ack := &OutMsg{MessageType: "ack", To: m.From, ID: m.ID}
-		if _, err = c.Send(ack); err != nil {
-			return nil, fmt.Errorf("failed to send ack message to CCS with error: %v", err)
-		}
+		// ack := &OutMsg{MessageType: "ack", To: m.From, ID: m.ID}
+		// if _, err = c.Send(ack); err != nil {
+		// 	return nil, fmt.Errorf("failed to send ack message to CCS with error: %v", err)
+		// }
 		return &m, nil
 	default:
 		// unknown message types can be ignored, as per GCM specs
