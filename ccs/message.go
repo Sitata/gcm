@@ -10,6 +10,7 @@ type OutMsg struct {
 	Condition                string            `json:"condition,omitempty"`
 	ID                       string            `json:"message_id"`
 	CollapseKey              string            `json:"collapse_key,omitempty"`
+	MessageType              string            `json:"message_type"`
 	Priority                 string            `json:"priority,omitempty"`
 	ContentAvail             bool              `json:"content_available,omitempty"`
 	DelayWhileIdle           bool              `json:"delay_while_idle,omitempty"`
