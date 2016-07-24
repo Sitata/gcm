@@ -9,6 +9,7 @@ type OutMsg struct {
 	To                       string            `json:"to"`
 	ID                       string            `json:"message_id"`
 	Data                     map[string]string `json:"data,omitempty"`
+	Notification             map[string]string `json:"notification,omitempty"`
 	MessageType              string            `json:"message_type,omitempty"`
 	CollapseKey              string            `json:"collapse_key,omitempty"`
 	TimeToLive               int               `json:"time_to_live,omitempty"`               //default:2419200 (in seconds = 4 weeks)
@@ -18,12 +19,13 @@ type OutMsg struct {
 
 // InMsg is an incoming GCM CCS message.
 type InMsg struct {
-	From        string            `json:"from"`
-	ID          string            `json:"message_id"`
-	Category    string            `json:"category"`
-	Data        map[string]string `json:"data"`
-	MessageType string            `json:"message_type"`
-	ControlType string            `json:"control_type"`
-	Err         string            `json:"error"`
-	ErrDesc     string            `json:"error_description"`
+	From         string            `json:"from"`
+	ID           string            `json:"message_id"`
+	Category     string            `json:"category"`
+	Notification map[string]string `json:"notification"`
+	Data         map[string]string `json:"data"`
+	MessageType  string            `json:"message_type"`
+	ControlType  string            `json:"control_type"`
+	Err          string            `json:"error"`
+	ErrDesc      string            `json:"error_description"`
 }
